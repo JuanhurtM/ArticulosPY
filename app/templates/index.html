@@ -29,29 +29,27 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col w-25">Title</th>
+                <th scope="col w-25">body</th>
                 <th scope="col w-25">Author</th>
                 <th scope="col w-25">Actions</th>
             </tr>
         </thead>
         <tbody>
+          {% for data in data %}
             <tr>
-              <td>{{ data[0].id }}</td>
-              <td>{{ data[0].title }}</td>
-              <td>{{ data[0].author }}</td>
-              <td><a href="/article0">See Article</a></td>
+              <td>{{ data[0]}}</td>
+              <td>{{ data[1]}}</td>
+              <td>{{ data[2]}}</td>
+              <td>{{ data[3]}}</td>
+              <td>
+                <a class="btn btn-warning" href="{{url_for('editar_articulo', id=data[0])}}">Edit</a>
+                <form action="{{'/eliminarArticulo'}}" method="POST">
+                  <input type="hidden" name="id" value="{{data[0]}}">
+                  <button class="btn btn-danger">Delete</button>
+                </form>
+              </td>
             </tr>
-            <tr>
-              <td>{{ data[1].id }}</td>
-              <td>{{ data[1].title }}</td>
-              <td>{{ data[1].author }}</td>
-              <td><a href="/article1">See Article</a></td>
-            </tr>
-            <tr>
-              <td>{{ data[2].id }}</td>
-              <td>{{ data[2].title }}</td>
-              <td>{{ data[2].author }}</td>
-              <td><a href="/article2">See Article</a></td>
-            </tr>
+          {% endfor %}
         </tbody>
       </table>  
 

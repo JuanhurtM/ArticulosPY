@@ -31,24 +31,24 @@ def guardar_articulo():
 @app.route('/eliminarArticulo',  methods=["POST"])
 def eliminiar_articulo():
     articulosController.eliminarArticulo(request.form['id'])
+    return redirect('/')
 
 
 @app.route("/editarArticulo/<int:id>")
-def editar_juego(id):
+def editar_articulo(id):
     # Obtener el juego por ID
     datos = articulosController.ListarArticulo(id)
     return render_template("editarArticulo.html", data=datos)
 
 
 @app.route("/actualizarArticulo", methods=["POST"])
-def actualizar_juego():
+def actualizar_articulo():
     id = request.form['id']
     title = request.form['title']
     body = request.form['body']
     author = request.form['author']
-    create_date = request.form['date']
     articulosController.actualizarArticulo(
-        id, title, body, author, create_date)
+        id, title, body, author)
     return redirect("/")
 
 

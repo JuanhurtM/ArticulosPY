@@ -5,7 +5,7 @@ def insertar(id, title, body, author, create_date):
     conexion = obtener_conexion()
 
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO articles(id, title, body, author, crate_date) VALUES (%s, %s, %s)",
+        cursor.execute("INSERT INTO articles(id, title, body, author, create_date) VALUES (%s, %s, %s, %s, %s)",
                        (id, title, body, author, create_date))
 
         conexion.commit()
@@ -16,7 +16,7 @@ def listar():
     conexion = obtener_conexion()
     articulos = []
     with conexion.cursor() as cursor:
-        cursor.execute("SLECT * FROM articles")
+        cursor.execute("SELECT * FROM articles")
         articulos = cursor.fetchall()
     conexion.close()
 
@@ -42,7 +42,7 @@ def eliminarArticulo(id):
     conexion.close()
 
 
-def actualizarArticulo(id, title, body, author, create_date):
+def actualizarArticulo(id, title, body, author):
     conexion = obtener_conexion()
     with conexion.cursor() as cursor:
         cursor.execute("UPDATE articles SET title = %s, body = %s, author = %s WHERE id = %s",
